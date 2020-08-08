@@ -1,0 +1,26 @@
+@import '../assets//style/mixin.scss';
+
+.author {
+  position: absolute;
+  left: 110px;
+  bottom: 42px;
+
+  &-container {
+    @include flex();
+  }
+
+  &-logo {
+    @include backgroundImage(66px, 64px);
+    background-image:url('../assets/image/common/author-logo.png');
+  }
+
+  &-en {
+    @include backgroundImage(56px, 65px);
+    background-image:url('../assets/image/common/author-en.png');
+  }
+
+  &-zh {
+    @include backgroundImage(178px, 34px);
+    background-image:url('../assets/image/common/author-zh.png');
+  }
+}

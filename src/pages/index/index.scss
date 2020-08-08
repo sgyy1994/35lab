@@ -1,0 +1,377 @@
+@import "../../assets//style/mixin.scss";
+
+@keyframes brushAnimation {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, 15px);
+  }
+}
+
+@keyframes handAnimation {
+  25% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(55px, 25px);
+  }
+}
+
+.landscape {
+  @include flex();
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &-author {
+    @include flex();
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    position: relative;
+    left: 80px;
+
+    &-logo {
+      @include backgroundImage(66px, 64px);
+      background-image: url("../../assets/image/common/author-logo.png");
+    }
+
+    &-en {
+      @include backgroundImage(56px, 65px);
+      background-image: url("../../assets/image/common/author-en.png");
+    }
+
+    &-zh {
+      @include backgroundImage(178px, 34px);
+      background-image: url("../../assets/image/common/author-zh.png");
+    }
+  }
+
+  &-row {
+    display: flex;
+    align-items: flex-start;
+    width: 651px;
+  }
+
+  &-right {
+    @include flex();
+    flex-direction: column;
+
+    &-35lib {
+      @include backgroundImage(364px, 395px);
+      background-image: url("../../assets/image/landscape/ic-35lib.png");
+    }
+
+    &-logo {
+      @include backgroundImage(179px, 86px);
+      background-image: url("../../assets/image/members/ic-35lib.png");
+      transform: scale(1.8);
+    }
+  }
+
+  &-tips {
+    @include backgroundImage(193px, 188px);
+    background-image: url("../../assets/image/landscape/ic-tips.png");
+    // margin-right: auto;
+    position: relative;
+    left: -200px;
+  }
+
+  &-ling {
+    @include backgroundImage(651px, 579px);
+    background-image: url("../../assets/image/landscape/bg-ling.png");
+  }
+}
+
+.index {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #6600ff;
+}
+
+.portrait {
+  &-wrapper {
+    @include flex();
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &.is-center {
+      justify-content: center;
+    }
+    &.is-space-around {
+      justify-content: space-around;
+    }
+  }
+
+  &-title {
+    width: 509px;
+    height: 321px;
+  }
+
+  &-diamond {
+    @include backgroundImage(892px, 666px);
+    background-image: url("../../assets/image/index/bg-diamond.png");
+  }
+
+  &-desc {
+    &-box {
+      margin-left: 80px;
+      margin-right: 80px;
+      width: 820px;
+      height: 560px;
+      padding: 80px 30px 0;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      background: #330099;
+      color: #fff;
+      font-size: 40px;
+      text-indent: 90px;
+    }
+
+    &-img {
+      @include flex();
+      @include backgroundImage(398px, 572px);
+      background-image: url("../../assets/image/desc/bg-desc.png");
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    &-brush {
+      @include backgroundImage(293px, 153px);
+      background-image: url("../../assets/image/desc/ic-brush.png");
+      position: relative;
+      top: 145px;
+      animation: brushAnimation 1.2s ease-in-out 0s infinite alternate;
+    }
+  }
+
+  &-btn {
+    @include backgroundImage(30px, 35px);
+
+    &.is-prev {
+      background-image: url("../../assets/image/desc/btn-prev.png");
+    }
+    &.is-next {
+      background-image: url("../../assets/image/desc/btn-next.png");
+    }
+  }
+
+  &-members {
+    @include flex();
+    margin: 0 45px;
+  }
+
+  &-member {
+    @include flex();
+    flex-direction: column;
+    margin: 0 75px;
+
+    &-header {
+      @include backgroundImage(291px, 352px);
+      position: relative;
+
+      &.is-chi {
+        background-image: url("../../assets/image/members/head-chi.png");
+      }
+      &.is-miao {
+        background-image: url("../../assets/image/members/head-miao.png");
+      }
+      &.is-kai {
+        background-image: url("../../assets/image/members/head-kai.png");
+      }
+    }
+
+    &-glasses {
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      &.is-chi {
+        background-image: url("../../assets/image/members/glasses-chi.png");
+        width: 126px;
+        height: 59px;
+        top: 156px;
+        right: 20px;
+      }
+      &.is-miao {
+        background-image: url("../../assets/image/members/glasses-miao.png");
+        width: 113px;
+        height: 62px;
+        top: 134px;
+        right: 22px;
+      }
+      &.is-kai {
+        background-image: url("../../assets/image/members/glasses-kai.png");
+        width: 133px;
+        height: 81px;
+        top: 124px;
+        right: 40px;
+      }
+    }
+
+    &-hand {
+      @include backgroundImage(91px, 174px);
+      background-image: url("../../assets/image/members/ic-hand.png");
+      position: absolute;
+      animation: handAnimation 4s ease 0s infinite;
+
+      &.is-chi {
+        bottom: -50px;
+        right: -30px;
+      }
+      &.is-miao {
+        bottom: -40px;
+        right: -32px;
+      }
+      &.is-kai {
+        bottom: -40px;
+        right: -10px;
+      }
+    }
+
+    &-bottom {
+      @include flex();
+      justify-content: flex-end;
+      margin-top: 60px;
+      height: 51px;
+    }
+
+    &-index {
+      @include backgroundImage(42px, 51px);
+      margin-right: 10px;
+
+      &.is-1 {
+        background-image: url("../../assets/image/members/ic-01.png");
+      }
+      &.is-2 {
+        background-image: url("../../assets/image/members/ic-02.png");
+      }
+      &.is-3 {
+        background-image: url("../../assets/image/members/ic-03.png");
+      }
+    }
+
+    &.info {
+      @include flex();
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 51px;
+    }
+
+    &-name {
+      @include font(36px, rgb(81, 207, 81));
+      font-weight: bold;
+      line-height: 30px;
+    }
+
+    &-desc {
+      @include font(24px, #fff);
+    }
+
+    &-btn {
+      @include backgroundImage(30px, 35px);
+      background-image: url("../../assets/image/desc/btn-next.png");
+      margin-left: 20px;
+    }
+  }
+
+  &-logo {
+    @include backgroundImage(179px, 86px);
+    background-image: url("../../assets/image/members/ic-35lib.png");
+    position: absolute;
+    left: 110px;
+    top: 42px;
+  }
+}
+
+.display {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 90%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &-control {
+    @include flex();
+    flex-direction: column;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 10%;
+    height: 100%;
+    background: #6600ff;
+  }
+
+  &-back {
+    @include backgroundImage(30px, 35px);
+    background-image: url("../../assets/image/desc/btn-prev.png");
+  }
+
+  &-img {
+    position: relative;
+    z-index: 2;
+
+    &.is-chi {
+      @include backgroundImage(18508px, 100%);
+      background-image: url("../../assets/image/display/display-chi.jpg");
+    }
+    &.is-miao {
+      @include backgroundImage(15485px, 100%);
+      background-image: url("../../assets/image/display/display-miao.jpg");
+    }
+    &.is-kai {
+      @include backgroundImage(15908px, 100%);
+      background-image: url("../../assets/image/display/display-kai.jpg");
+    }
+  }
+}
+
+.modal {
+  &-wrapper {
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    transform: translate(-50%, -50%);
+  }
+
+  &-container {
+    background: rgba(51, 0, 153, 0.8);
+  }
+
+  &-close {
+    @include backgroundImage(23px, 23px);
+    background-image: url("../../assets/image/landscape/ic-close.png");
+    position: absolute;
+    top: 40px;
+    right: 40px;
+  }
+
+  &-content {
+    position: relative;
+    padding: 30px;
+  }
+
+  &-title {
+    @include font(36px, #fff, bold);
+    margin-bottom: 25px;
+  }
+
+  &-text {
+    @include font(24px, #fff);
+  }
+}
