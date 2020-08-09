@@ -159,9 +159,11 @@
     @include backgroundImage(30px, 35px);
 
     &.is-prev {
+      margin-right: 20px;
       background-image: url("../../assets/image/desc/btn-prev.png");
     }
     &.is-next {
+      margin-left: 20px;
       background-image: url("../../assets/image/desc/btn-next.png");
     }
   }
@@ -295,18 +297,10 @@
 }
 
 .display {
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 90%;
-  height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-
   &-control {
     @include flex();
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     z-index: 3;
     top: 0;
     left: 0;
@@ -318,6 +312,16 @@
   &-back {
     @include backgroundImage(30px, 35px);
     background-image: url("../../assets/image/desc/btn-prev.png");
+  }
+
+  &-wrapper {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 90%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   &-img {

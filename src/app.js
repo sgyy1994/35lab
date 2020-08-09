@@ -1,8 +1,8 @@
 import { Component } from 'react'
-import VConsole from 'vconsole'
+// import VConsole from 'vconsole'
 import './app.scss'
 
-new VConsole()
+// new VConsole()
 
 class App extends Component {
 

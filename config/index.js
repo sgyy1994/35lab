@@ -1,5 +1,5 @@
 const config = {
-  projectName: '35lib',
+  projectName: '35lab',
   date: '2020-7-11',
   designWidth: 750,
   deviceRatio: {
@@ -44,7 +44,10 @@ const config = {
   },
   h5: {
     router: {
-      mode: 'hash'
+      mode: 'hash',
+      customRoutes: {
+        '/pages/index/index': '/index'
+      }
     },
     publicPath: '/dist/',
     staticDirectory: 'static',

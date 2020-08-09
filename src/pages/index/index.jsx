@@ -213,11 +213,11 @@ export default class Index extends Component {
   renderDisplay() {
     const short = this._item.short || 'miao'
     return (
-      <View className='display-wrapper'>
+      <View>
         <View className='display-control' onClick={this.changePage.bind(this, 3)}>
           <View className='display-back' onClick={() => console.log('click me!')}></View>
         </View>
-        <View className='display'>
+        <View className='display-wrapper'>
           <View className={`display-img is-${short}`}
             onTouchStart={e => this.onDisplayTouchEnd(e)}
             onTouchEnd={e => this.onDisplayTouchEnd(e)}
