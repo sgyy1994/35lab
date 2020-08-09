@@ -327,17 +327,20 @@
   &-img {
     position: relative;
     z-index: 2;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 
     &.is-chi {
-      @include backgroundImage(18508px, 100%);
+      width: 18508px;
       background-image: url("../../assets/image/display/display-chi.jpg");
     }
     &.is-miao {
-      @include backgroundImage(15485px, 100%);
+      width: 15485px;
       background-image: url("../../assets/image/display/display-miao.jpg");
     }
     &.is-kai {
-      @include backgroundImage(15908px, 100%);
+      width: 15908px;
       background-image: url("../../assets/image/display/display-kai.jpg");
     }
   }

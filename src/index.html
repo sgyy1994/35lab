@@ -25,7 +25,11 @@
         if (a >= 750) {
           r.style.fontSize = "20px"
         } else if (a >= 640 && a < 750) {
-          r.style.fontSize = "40px"
+          if (v <= 2 || v >= 3) {
+            r.style.fontSize = "20px" // iphone6 iphone6S
+          } else {
+            r.style.fontSize = "40px" // 部分安卓机
+          }
         } else {
           if (a <= 320) {
             r.style.fontSize = "20px"
