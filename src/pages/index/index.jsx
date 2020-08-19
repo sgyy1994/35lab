@@ -3,9 +3,28 @@ import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import Author from '../../components/author'
+
 import './index.scss'
+
 import imgTitle from '../../assets/image/index/title.png'
 import imgTitleLight from '../../assets/image/index/title-light.png'
+import displayChi from '../../assets/image/display/display-chi.jpg'
+import displayMiao from '../../assets/image/display/display-miao-v2.jpg'
+import displayKai from '../../assets/image/display/display-kai.jpg'
+import imgTubu from '../../assets/image/display/tubu.jpg'
+import imgTubuOrigin from '../../assets/image/display/tubu-origin.jpg'
+import imgShangyuanankang from '../../assets/image/display/shangyuanankang.jpg'
+import imgShangyuanankangOrigin from '../../assets/image/display/shangyuanankang-origin.jpg'
+import imgJichedang from '../../assets/image/display/jichedang.jpg'
+import imgJichedangOrigin from '../../assets/image/display/jichedang-origin.jpg'
+import imgKaizhan from '../../assets/image/display/kaizhan.jpg'
+import imgKaizhanOrigin from '../../assets/image/display/kaizhan-origin.jpg'
+import imgXiaweiyi from '../../assets/image/display/xiaweiyi.jpg'
+import imgXiaweiyiOrigin from '../../assets/image/display/xiaweiyi-origin.jpg'
+import imgMaerdaifu from '../../assets/image/display/maerdaifu.jpg'
+import imgMaerdaifuOrigin from '../../assets/image/display/maerdaifu-origin.jpg'
+import imgChengshenvtuan from '../../assets/image/display/chengshenvtuan.jpg'
+import imgChengshenvtuanOrigin from '../../assets/image/display/chengshenvtuan-origin.jpg'
 
 export default class Index extends Component {
   constructor(props) {
@@ -22,6 +41,15 @@ export default class Index extends Component {
       { short: 'chi', name: '嘘！景观', desc: '私家庭院 · 公共景观' },
       { short: 'miao', name: '嘘！平面', desc: '商业插画 · 宣传物料' },
       { short: 'kai', name: '嘘！室内', desc: '商铺展位 · 家装设计' }
+    ]
+    this._displayMiao = [
+      { id: 1, url: imgTubuOrigin, name: 'tubu' },
+      { id: 2, url: imgShangyuanankangOrigin, name: 'shangyuanankang' },
+      { id: 3, url: imgJichedangOrigin, name: 'jichedang' },
+      { id: 4, url: imgKaizhanOrigin, name: 'kaizhan' },
+      { id: 5, url: imgXiaweiyiOrigin, name: 'xiaweiyi' },
+      { id: 6, url: imgMaerdaifuOrigin, name: 'maerdaifu' },
+      { id: 7, url: imgChengshenvtuanOrigin, name: 'chengshenvtuan' }
     ]
     this._deviceInfo = Taro.getSystemInfoSync()
     console.log(this._deviceInfo)
@@ -81,7 +109,6 @@ export default class Index extends Component {
   }
 
   changePage(newPage) {
-    console.log('newPage ', newPage)
     const { page } = this.state
     if (page === newPage) return
     if (newPage !== 1) clearTimeout(this._lightTimeout)
@@ -96,21 +123,64 @@ export default class Index extends Component {
   }
 
   showDisplay(item) {
-    console.log(item)
     this._item = item
     this.setState({ page: 4 })
   }
 
-  onDisplayTouchStart(e) {
-    const { page } = this.state
-    if (page !== 4) return false
-    console.log('start', e)
+  _imgWidth = 0
+  onDisplayOnLoad(e) {
+    e.persist();
+    this._imgWidth = Number.parseInt(e.target.clientWidth, 10)
+    console.log('_imgWidth', this._imgWidth)
   }
 
-  onDisplayTouchEnd(e) {
+  _clientX = 0
+  // _percent = 0
+  // onDisplayTouchEnd(e) {
+  //   e.persist();
+  //   const { page } = this.state
+  //   if (page !== 4) return false
+  //   this._clientX = -Number.parseInt(e.target.x, 10)
+  //   this._percent = Number.parseInt(100 * this._clientX / this._imgWidth)
+  //   console.log(this._clientX, this._percent + '%')
+  //   this.onWhichImgShow()
+  // }
+
+  _clientX = 0
+  _percent = 0
+  onDisplayTouchMove(e) {
+    e.persist();
     const { page } = this.state
     if (page !== 4) return false
-    console.log('end', e)
+    this._clientX = -Number.parseInt(e.target.x, 10)
+    this._percent = Number.parseInt(100 * this._clientX / this._imgWidth)
+    // console.log(this._clientX, this._percent + '%')
+    this.onWhichImgShow()
+  }
+
+  onWhichImgShow() {
+    if (this._clientX > 5800) {
+      this._displayMiao[0].url = imgTubu
+    }
+    if (this._clientX > 5950) {
+      this._displayMiao[1].url = imgShangyuanankang
+    }
+    if (this._clientX > 6200) {
+      this._displayMiao[2].url = imgJichedang
+    }
+    if (this._clientX > 6400) {
+      this._displayMiao[3].url = imgKaizhan
+    }
+    if (this._clientX > 6600) {
+      this._displayMiao[4].url = imgXiaweiyi
+    }
+    if (this._clientX > 6900) {
+      this._displayMiao[5].url = imgMaerdaifu
+    }
+    if (this._clientX > 7000) {
+      this._displayMiao[6].url = imgChengshenvtuan
+    }
+    this.setState({})
   }
 
   renderLandscape() {
@@ -124,7 +194,6 @@ export default class Index extends Component {
           </View>
           <View className='landscape-right'>
             <View className='landscape-right-35lib'></View>
-            <View className='landscape-right-logo'></View>
           </View>
         </View>
         <View className='landscape-tips' onClick={() => this.setState({ showTips: true })}></View>
@@ -165,7 +234,7 @@ export default class Index extends Component {
       <View className='portrait-wrapper is-center'>
         <View className='portrait-btn is-prev' onClick={this.changePage.bind(this, 1)}></View>
         <View className='portrait-desc-box'>
-          三个武人设计工作室主营景观、平面、室内等项目类型，凭借着在著名设计院、互联网大厂、知名地产商等企业的多年设计工作经验，
+          查无此人设计工作室主营景观、平面、室内等项目类型，凭借着在著名设计院、互联网大厂、知名地产商等企业的多年设计工作经验，
           集调研、分析、设计、管理于一体，把握瞬息万变的市场景象，对市场未来趋势及时作出合理的判断，为客户提供最满意的设计效果和最大的商业价值。
         </View>
         <View className='portrait-desc-img'>
@@ -205,23 +274,42 @@ export default class Index extends Component {
         </View>
         <View className='portrait-btn is-empty' onClick={this.changePage.bind(this, 4)}></View>
         <View className='portrait-logo'></View>
-        <Author />
       </View>
     )
   }
 
   renderDisplay() {
     const short = this._item.short || 'miao'
+    const imgUrl = {
+      'chi': displayChi,
+      'miao': displayMiao,
+      'kai': displayKai,
+      '': displayMiao
+    }[short]
     return (
       <View>
         <View className='display-control' onClick={this.changePage.bind(this, 3)}>
-          <View className='display-back' onClick={() => console.log('click me!')}></View>
+          <View className='display-back'></View>
         </View>
         <View className='display-wrapper'>
-          <View className={`display-img is-${short}`}
-            onTouchStart={e => this.onDisplayTouchEnd(e)}
-            onTouchEnd={e => this.onDisplayTouchEnd(e)}
-          ></View>
+          <View className='display-container'>
+            <img
+              src={imgUrl}
+              className='display-img'
+              alt='img'
+              onLoad={e => this.onDisplayOnLoad(e)}
+              onTouchMove={e => this.onDisplayTouchMove(e)}
+              // onTouchEnd={e => this.onDisplayTouchEnd(e)}
+            />
+            {
+              short === 'miao' &&
+              this._displayMiao.map(item => {
+                return (
+                  <img key={item.id} src={item.url} className={`display-item is-${item.name}`} alt={`${item.name}`} />
+                )
+              })
+            }
+          </View>
         </View>
       </View>
     )
