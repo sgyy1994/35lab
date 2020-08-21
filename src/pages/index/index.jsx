@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-elements */
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, ScrollView, Image } from '@tarojs/components'
 import Author from '../../components/author'
 
 import './index.scss'
@@ -31,7 +31,7 @@ export default class Index extends Component {
     super(props)
     this.state = {
       type: 1, // 1：竖屏 2：横屏
-      page: 1, // 1: cover 2: description 3: members
+      page: 4, // 1: cover 2: description 3: members
       showLightTitle: false,
       showGlassesLight: false,
       showTips: false
@@ -158,26 +158,32 @@ export default class Index extends Component {
     this.onWhichImgShow()
   }
 
+  onDisplayScroll(e) {
+    console.log('onDisplayScroll', e)
+    e.persist();
+    // console.log('onDisplayScroll', e)
+  }
+
   onWhichImgShow() {
-    if (this._clientX > 5800) {
+    if (this._percent >= 73) {
       this._displayMiao[0].url = imgTubu
     }
-    if (this._clientX > 5950) {
+    if (this._percent >= 75) {
       this._displayMiao[1].url = imgShangyuanankang
     }
-    if (this._clientX > 6200) {
+    if (this._clientX >= 77) {
       this._displayMiao[2].url = imgJichedang
     }
-    if (this._clientX > 6400) {
+    if (this._clientX >= 79) {
       this._displayMiao[3].url = imgKaizhan
     }
-    if (this._clientX > 6600) {
+    if (this._clientX >= 81) {
       this._displayMiao[4].url = imgXiaweiyi
     }
-    if (this._clientX > 6900) {
+    if (this._clientX >= 88) {
       this._displayMiao[5].url = imgMaerdaifu
     }
-    if (this._clientX > 7000) {
+    if (this._clientX >= 90) {
       this._displayMiao[6].url = imgChengshenvtuan
     }
     this.setState({})
@@ -292,6 +298,7 @@ export default class Index extends Component {
           <View className='display-back'></View>
         </View>
         <View className='display-wrapper'>
+          <ScrollView scrollX onScroll={this.onDisplayScroll.bind(this)} className='display-scroll'>
           <View className='display-container'>
             <img
               src={imgUrl}
@@ -310,6 +317,7 @@ export default class Index extends Component {
               })
             }
           </View>
+          </ScrollView>
         </View>
       </View>
     )

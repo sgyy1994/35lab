@@ -317,6 +317,13 @@
     left: 10%;
     width: 90%;
     height: 100%;
+    // overflow-x: auto;
+    // overflow-y: hidden;
+  }
+
+  &-scroll {
+    width: 100%;
+    height: 100%;
     overflow-x: auto;
     overflow-y: hidden;
   }
@@ -342,27 +349,27 @@
     height: 325px;
 
     &.is-tubu {
-      right: 3450px;
+      right: 19%;
     }
     &.is-shangyuanankang {
-      right: 2960px;
+      right: 16.3%;
     }
     &.is-jichedang {
-      right: 2470px;
+      right: 13.6%;
     }
     &.is-kaizhan {
-      right: 1980px;
+      right: 10.92%;
     }
     &.is-xiaweiyi {
-      right: 1490px;
+      right: 8.25%;
     }
     &.is-maerdaifu {
-      right: 765px;
+      right: 4.3%;
       width: 518px;
       height: 368px;
     }
     &.is-chengshenvtuan {
-      right: 170px;
+      right: 0.9%;
       width: 399px;
       height: 387px;
     }
