@@ -22,21 +22,7 @@
           tes = x.devicePixelRatio;
           v = n ? v : 1, u = 1 / v
         }
-        if (a >= 750) {
-          r.style.fontSize = "20px"
-        } else if (a >= 640 && a < 750) {
-          if (v <= 2 || v >= 3) {
-            r.style.fontSize = "20px" // iphone6 iphone6S
-          } else {
-            r.style.fontSize = "40px" // 部分安卓机
-          }
-        } else {
-          if (a <= 320) {
-            r.style.fontSize = "20px"
-          } else {
-            r.style.fontSize = a / 320 * 20 + "px"
-          }
-        }
+        r.style.fontSize = "20px"
       }
       x.addEventListener("resize", function () {
         w()

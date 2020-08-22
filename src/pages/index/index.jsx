@@ -9,7 +9,7 @@ import './index.scss'
 import imgTitle from '../../assets/image/index/title.png'
 import imgTitleLight from '../../assets/image/index/title-light.png'
 import displayChi from '../../assets/image/display/display-chi.jpg'
-import displayMiao from '../../assets/image/display/display-miao-v2.jpg'
+import displayMiao from '../../assets/image/display/display-miao-v3.jpg'
 import displayKai from '../../assets/image/display/display-kai.jpg'
 import imgTubu from '../../assets/image/display/tubu.jpg'
 import imgTubuOrigin from '../../assets/image/display/tubu-origin.jpg'
@@ -31,7 +31,7 @@ export default class Index extends Component {
     super(props)
     this.state = {
       type: 1, // 1：竖屏 2：横屏
-      page: 4, // 1: cover 2: description 3: members
+      page: 1, // 1: cover 2: description 3: members
       showLightTitle: false,
       showGlassesLight: false,
       showTips: false
@@ -128,65 +128,86 @@ export default class Index extends Component {
   }
 
   _imgWidth = 0
+  _imgHeight = 0
+  _imgRate = 0
+  _percent = 0
   onDisplayOnLoad(e) {
     e.persist();
     this._imgWidth = Number.parseInt(e.target.clientWidth, 10)
-    console.log('_imgWidth', this._imgWidth)
+    this._imgHeight = Number.parseInt(e.target.clientHeight, 10)
+    this._imgRate = Number((this._imgWidth / this._imgHeight).toFixed(2))
+    console.log('_imgWidth', this._imgWidth, '_imgHeight', this._imgHeight, 'rate', this._imgRate)
   }
 
-  _clientX = 0
-  // _percent = 0
-  // onDisplayTouchEnd(e) {
-  //   e.persist();
-  //   const { page } = this.state
-  //   if (page !== 4) return false
-  //   this._clientX = -Number.parseInt(e.target.x, 10)
-  //   this._percent = Number.parseInt(100 * this._clientX / this._imgWidth)
-  //   console.log(this._clientX, this._percent + '%')
-  //   this.onWhichImgShow()
-  // }
-
-  _clientX = 0
-  _percent = 0
-  onDisplayTouchMove(e) {
-    e.persist();
-    const { page } = this.state
-    if (page !== 4) return false
-    this._clientX = -Number.parseInt(e.target.x, 10)
-    this._percent = Number.parseInt(100 * this._clientX / this._imgWidth)
-    // console.log(this._clientX, this._percent + '%')
-    this.onWhichImgShow()
-  }
-
+  _scrollFlag = false
+  _scrollLeft = 0
   onDisplayScroll(e) {
-    console.log('onDisplayScroll', e)
-    e.persist();
-    // console.log('onDisplayScroll', e)
+    // console.log(e)
+    if (this._scrollFlag) return
+    this._scrollFlag = true
+    this._scrollLeft = e.detail.scrollLeft
+    setTimeout(() => {
+      this.onDealWithImages()
+      this._scrollFlag = false
+    }, 100)
   }
 
-  onWhichImgShow() {
-    if (this._percent >= 73) {
-      this._displayMiao[0].url = imgTubu
-    }
-    if (this._percent >= 75) {
-      this._displayMiao[1].url = imgShangyuanankang
-    }
-    if (this._clientX >= 77) {
-      this._displayMiao[2].url = imgJichedang
-    }
-    if (this._clientX >= 79) {
-      this._displayMiao[3].url = imgKaizhan
-    }
-    if (this._clientX >= 81) {
-      this._displayMiao[4].url = imgXiaweiyi
-    }
-    if (this._clientX >= 88) {
-      this._displayMiao[5].url = imgMaerdaifu
-    }
-    if (this._clientX >= 90) {
-      this._displayMiao[6].url = imgChengshenvtuan
-    }
+  onDealWithImages() {
+    const that = this
+    const val = that._deviceInfo.windowWidth > that._deviceInfo.windowHeight ? that._deviceInfo.windowWidth : that._deviceInfo.windowHeight
+    Taro.createSelectorQuery().select('#img1').boundingClientRect(function (rect) {
+      if (rect.left - 100 < val / 2) {
+        that._displayMiao[0].url = imgTubu
+      } else {
+        that._displayMiao[0].url = imgTubuOrigin
+      }
+    }).exec()
+    Taro.createSelectorQuery().select('#img2').boundingClientRect(function (rect) {
+      if (rect.left - 100 < val / 2) {
+        that._displayMiao[1].url = imgShangyuanankang
+      } else {
+        that._displayMiao[1].url = imgShangyuanankangOrigin
+      }
+    }).exec()
+    Taro.createSelectorQuery().select('#img3').boundingClientRect(function (rect) {
+      if (rect.left - 100 < val / 2) {
+        that._displayMiao[2].url = imgJichedang
+      } else {
+        that._displayMiao[2].url = imgJichedangOrigin
+      }
+    }).exec()
+    Taro.createSelectorQuery().select('#img4').boundingClientRect(function (rect) {
+      if (rect.left - 100 < val / 2) {
+        that._displayMiao[3].url = imgKaizhan
+      } else {
+        that._displayMiao[3].url = imgKaizhanOrigin
+      }
+    }).exec()
+    Taro.createSelectorQuery().select('#img5').boundingClientRect(function (rect) {
+      if (rect.left - 100 < val / 2) {
+        that._displayMiao[4].url = imgXiaweiyi
+      } else {
+        that._displayMiao[4].url = imgXiaweiyiOrigin
+      }
+    }).exec()
+    Taro.createSelectorQuery().select('#img6').boundingClientRect(function (rect) {
+      if (rect.left - 100 < val / 2) {
+        that._displayMiao[5].url = imgMaerdaifu
+      } else {
+        that._displayMiao[5].url = imgMaerdaifuOrigin
+      }
+    }).exec()
+    Taro.createSelectorQuery().select('#img7').boundingClientRect(function (rect) {
+      if (rect.left < val) {
+        that._displayMiao[6].url = imgChengshenvtuan
+      } else {
+        that._displayMiao[6].url = imgChengshenvtuanOrigin
+      }
+    }).exec()
     this.setState({})
+  }
+
+  initTransition() {
   }
 
   renderLandscape() {
@@ -299,24 +320,30 @@ export default class Index extends Component {
         </View>
         <View className='display-wrapper'>
           <ScrollView scrollX onScroll={this.onDisplayScroll.bind(this)} className='display-scroll'>
-          <View className='display-container'>
-            <img
-              src={imgUrl}
-              className='display-img'
-              alt='img'
-              onLoad={e => this.onDisplayOnLoad(e)}
-              onTouchMove={e => this.onDisplayTouchMove(e)}
-              // onTouchEnd={e => this.onDisplayTouchEnd(e)}
-            />
-            {
-              short === 'miao' &&
-              this._displayMiao.map(item => {
-                return (
-                  <img key={item.id} src={item.url} className={`display-item is-${item.name}`} alt={`${item.name}`} />
-                )
-              })
-            }
-          </View>
+            <View className='display-container'>
+              <img
+                src={imgUrl}
+                className='display-img'
+                alt='img'
+                onLoad={this.onDisplayOnLoad.bind(this)}
+              />
+              <View className='display-content'>
+              {
+                short === 'miao' && this._imgRate &&
+                this._displayMiao.map(item => {
+                  return (
+                    <img
+                      key={item.id}
+                      src={item.url}
+                      id={`img${item.id}`}
+                      className={`display-item is-${item.name}`}
+                      alt={`${item.name}`}
+                    />
+                  )
+                })
+              }
+              </View>
+            </View>
           </ScrollView>
         </View>
       </View>

@@ -317,8 +317,6 @@
     left: 10%;
     width: 90%;
     height: 100%;
-    // overflow-x: auto;
-    // overflow-y: hidden;
   }
 
   &-scroll {
@@ -335,6 +333,18 @@
     overflow: auto;
   }
 
+  &-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 100px;
+    width: 20.5%;
+    height: 100%;
+  }
+
   &-img {
     position: relative;
     z-index: 2;
@@ -342,36 +352,15 @@
   }
 
   &-item {
-    position: absolute;
-    z-index: 3;
-    top: 120px;
+    position: relative;
+    top: -100px;
     width: 325px;
-    height: 325px;
 
-    &.is-tubu {
-      right: 19%;
-    }
-    &.is-shangyuanankang {
-      right: 16.3%;
-    }
-    &.is-jichedang {
-      right: 13.6%;
-    }
-    &.is-kaizhan {
-      right: 10.92%;
-    }
-    &.is-xiaweiyi {
-      right: 8.25%;
-    }
     &.is-maerdaifu {
-      right: 4.3%;
       width: 518px;
-      height: 368px;
     }
     &.is-chengshenvtuan {
-      right: 0.9%;
       width: 399px;
-      height: 387px;
     }
   }
 }
